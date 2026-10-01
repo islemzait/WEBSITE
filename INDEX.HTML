@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Virtual Hub — تعلم كانفا واربح منها</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B3E;
+    --pink: #E8006F;
+    --pink-light: #FF3D8A;
+    --white: #FFFFFF;
+    --lavender: #F0EEFF;
+    --grey: #8A8FA8;
+    --card-bg: #F7F8FC;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    direction: rtl;
+    text-align: right;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--pink);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .nav-cta {
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232,0,111,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,0,111,0.15);
+    color: var(--pink-light);
+    border: 1px solid rgba(232,0,111,0.35);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    color: var(--white);
+    font-size: clamp(1.9rem, 6vw, 3rem);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 18px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 span {
+    color: var(--pink);
+  }
+  .hero p {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.05rem;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 15px 36px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    max-width: 320px;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 13px 36px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    max-width: 320px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    color: var(--white);
+    font-size: 1.6rem;
+    font-weight: 900;
+    display: block;
+  }
+  .stat-label {
+    color: var(--grey);
+    font-size: 0.8rem;
+  }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    background: var(--lavender);
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .proof-bar span {
+    color: var(--pink);
+  }
+
+  /* SECTION */
+  section {
+    padding: 56px 24px;
+  }
+  .section-tag {
+    color: var(--pink);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    color: var(--navy);
+  }
+  .sub {
+    color: var(--grey);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+    max-width: 500px;
+  }
+
+  /* PRODUCTS */
+  .products { background: var(--white); }
+  .product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1.5px solid rgba(13,27,62,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card.featured {
+    background: var(--navy);
+    border-color: var(--pink);
+  }
+  .badge-featured {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--pink);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 50px;
+  }
+  .product-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .product-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .product-card.featured h3 { color: var(--white); }
+  .product-desc {
+    font-size: 0.88rem;
+    color: var(--grey);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .product-card.featured .product-desc { color: rgba(255,255,255,0.6); }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .price {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--navy);
+  }
+  .product-card.featured .price { color: var(--pink); }
+  .price-old {
+    font-size: 0.82rem;
+    color: var(--grey);
+    text-decoration: line-through;
+    margin-right: 6px;
+  }
+  .btn-card {
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-card-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* WHAT YOU LEARN */
+  .learn { background: var(--lavender); }
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--white);
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+  .feature-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(232,0,111,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .feature-text h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: var(--navy);
+  }
+  .feature-text p {
+    font-size: 0.82rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--white); }
+  .testi-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1.5px solid rgba(13,27,62,0.06);
+  }
+  .stars {
+    color: #F5A623;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  .testi-text {
+    font-size: 0.9rem;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .author-info .name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .author-info .location {
+    font-size: 0.78rem;
+    color: var(--grey);
+  }
+
+  /* HOW IT WORKS */
+  .how { background: var(--navy); }
+  .how h2, .how .section-tag { color: var(--white); }
+  .how .sub { color: rgba(255,255,255,0.5); }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    right: 19px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: rgba(232,0,111,0.25);
+  }
+  .step {
+    display: flex;
+    gap: 18px;
+    padding: 20px 0;
+    position: relative;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-content h4 {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .step-content p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* FAQ */
+  .faq { background: var(--white); }
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item {
+    border: 1.5px solid rgba(13,27,62,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .faq-arrow { color: var(--pink); font-size: 1rem; transition: transform 0.2s; }
+  .faq-a {
+    display: none;
+    padding: 0 18px 16px;
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2f6e 100%);
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    color: var(--white);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 12px;
+  }
+  .final-cta p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-big {
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 17px 44px;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    max-width: 340px;
+  }
+  .guarantee {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #070F24;
+    padding: 28px 24px;
+    text-align: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.8rem;
+  }
+  footer span { color: var(--pink); }
+
+  @media (min-width: 640px) {
+    .hero-btns { flex-direction: row; justify-content: center; }
+    .btn-primary, .btn-secondary { width: auto; }
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .testi-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .features-list { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🎨</div>
+    Virtual Hub
+  </div>
+  <a href="#products" class="nav-cta">اشتري دليل كانفا</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🔥 الدليل الأول من نوعه بالدارجة الجزائرية</div>
+  <h1>تعلم <span>كانفا</span> من الصفر واربح منها فلوس حقيقية</h1>
+  <p>دليل عملي بالدارجة — تفتح كانفا، تصنع تصاميم احترافية، وتبيعها. ما تحتاج لا خبرة لا شهادة.</p>
+  <div class="hero-btns">
+    <a href="#products" class="btn-primary">اشتري الدليل الآن</a>
+    <a href="#learn" class="btn-secondary">شوف وعلاش يفيدك</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">+500</span>
+      <span class="stat-label">زبون جزائري</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4.9⭐</span>
+      <span class="stat-label">تقييم متوسط</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">24h</span>
+      <span class="stat-label">وصول فوري</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  🛡️ ضمان استرداد <span>7 أيام</span> — إذا ما عجبكش نردولك فلوسك كاملة
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <span class="section-tag">المنتجات</span>
+  <h2>اختار الدليل اللي يناسبك</h2>
+  <p class="sub">كل دليل مكتوب بالدارجة الجزائرية — سهل تفهمه وتطبقه من أول يوم</p>
+
+  <div class="product-grid">
+
+    <div class="product-card featured">
+      <span class="badge-featured">⭐ الأكثر مبيعاً</span>
+      <span class="product-emoji">🚀</span>
+      <h3>الدليل الشامل لكانفا Pro</h3>
+      <p class="product-desc">من صفر حتى احترافي — كل أدوات كانفا، التصاميم اللي تبيعها، وكيفاش تجيب كلاونت أول شهر</p>
+      <div class="product-footer">
+        <div>
+          <span class="price-old">2000 دج</span>
+          <span class="price">990 دج</span>
+        </div>
+        <a href="https://wa.me/213XXXXXXXXX?text=حابب نشتري الدليل الشامل لكانفا" class="btn-card">اشتري الآن</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-emoji">🎨</span>
+      <h3>دليل التصاميم للمبتدئين</h3>
+      <p class="product-desc">تعلم تصنع logos، posts، وflyers احترافية في أقل من ساعة — حتى لو ما عندكش خبرة</p>
+      <div class="product-footer">
+        <div>
+          <span class="price">500 دج</span>
+        </div>
+        <a href="https://wa.me/213XXXXXXXXX?text=حابب نشتري دليل التصاميم" class="btn-card-outline">اشتري</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-emoji">💰</span>
+      <h3>كيفاش تربح من كانفا</h3>
+      <p class="product-desc">أفكار عملية وجاهزة للتطبيق — بيع تصاميم، اشتغل freelance، واكسب من التصميم على النت</p>
+      <div class="product-footer">
+        <div>
+          <span class="price">700 دج</span>
+        </div>
+        <a href="https://wa.me/213XXXXXXXXX?text=حابب نشتري دليل الربح من كانفا" class="btn-card-outline">اشتري</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-emoji">📦</span>
+      <h3>باك كامل — 3 أدلة</h3>
+      <p class="product-desc">الثلاثة أدلة مع بعض بسعر مخفوض — أحسن استثمار تعمله في نفسك</p>
+      <div class="product-footer">
+        <div>
+          <span class="price-old">3200 دج</span>
+          <span class="price">1500 دج</span>
+        </div>
+        <a href="https://wa.me/213XXXXXXXXX?text=حابب نشتري الباك الكامل" class="btn-card">اشتري الباك</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT YOU LEARN -->
+<section class="learn" id="learn">
+  <span class="section-tag">وعلاش يفيدك</span>
+  <h2>شنو رح تتعلم بالضبط</h2>
+  <p class="sub">مش نظرية — خطوات عملية تطبقها مباشرة</p>
+
+  <div class="features-list">
+    <div class="feature-item">
+      <div class="feature-icon">🖥️</div>
+      <div class="feature-text">
+        <h4>كل أدوات كانفا Pro</h4>
+        <p>Magic Resize، Brand Kit، Background Remover — كل شيء مشروح بالدارجة</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💼</div>
+      <div class="feature-text">
+        <h4>تصاميم تتباع</h4>
+        <p>Logo، Flyer، Post، CV، Invitation — نماذج جاهزة تعدل عليها</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💸</div>
+      <div class="feature-text">
+        <h4>كيفاش تجيب كلاونت</h4>
+        <p>طريقة عملية تلقى من يدفعلك على تصاميمك من الجزائر</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-text">
+        <h4>سرعة الإنتاج</h4>
+        <p>تصنع تصميم احترافي في 10 دقائق — مش ساعات</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📱</div>
+      <div class="feature-text">
+        <h4>التصميم من الموبايل</h4>
+        <p>ما تحتاجش كمبيوتر — الموبايل يكفيك لتبدأ</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🌐</div>
+      <div class="feature-text">
+        <h4>بيع تصاميمك أونلاين</h4>
+        <p>منصات تبيع عليها تصاميمك وتجمع فلوس من الجزائر</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <span class="section-tag">شهادات الزبائن</span>
+  <h2>شنو قالوا اللي جربوا</h2>
+  <p class="sub">ناس حقيقيين من الجزائر جربوا وشاركوا تجربتهم</p>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"والله صراحة الدليل غيّر طريقة تفكيري — بدأت نربح من كانفا في أقل من شهر. نشكرك يا Virtual Hub"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background: #6C63FF;">ي</div>
+        <div class="author-info">
+          <div class="name">يوسف م.</div>
+          <div class="location">وهران 🇩🇿</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"كنت نحسب كانفا صعيبة — بعد ما قريت الدليل فهمت كل شيء. المعلومات واضحة وعملية بزاف"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background: var(--pink);">ر</div>
+        <div class="author-info">
+          <div class="name">ريم ب.</div>
+          <div class="location">الجزائر العاصمة 🇩🇿</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"الباك الكامل يسوى أكثر من ثمنه — ربحت منه 3 مرات في أول أسبوع. فكرة الفريلانس شرحوها زين"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background: #00B288;">ك</div>
+        <div class="author-info">
+          <div class="name">كريم ز.</div>
+          <div class="location">قسنطينة 🇩🇿</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"أحسن استثمار عملته — 990 دج مقابل معلومات بالملايين. نوصي بيه لكل واحد يحب يتعلم التصميم"</p>
+      <div class="testi-author">
+        <div class="avatar" style="background: #F5A623;">س</div>
+        <div class="author-info">
+          <div class="name">سارة ح.</div>
+          <div class="location">عنابة 🇩🇿</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <span class="section-tag">كيفاش تحصل على الدليل</span>
+  <h2>3 خطوات وتبدأ</h2>
+  <p class="sub">العملية سهلة وتاخذ أقل من دقيقتين</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>اختار دليلك</h4>
+        <p>اختار الدليل اللي يناسبك وضغط على "اشتري الآن"</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>ادفع بطريقتك</h4>
+        <p>CCP، Baridimob، أو CIB — كل طرق الدفع الجزائرية متاحة</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>وصلك الدليل فوراً</h4>
+        <p>PDF في الواتساب أو الميسنجر — تقرأه من الموبايل مباشرة</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <span class="section-tag">أسئلة مكررة</span>
+  <h2>عندك سؤال؟</h2>
+  <p class="sub">الأسئلة اللي تتكرر عند زبائننا</p>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        واش نحتاج كانفا Pro لنستفيد من الدليل؟
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">لا، الدليل يشرح كيفاش تستخدم النسخة المجانية والـ Pro. نشرحولك كيفاش تحصل على Pro بأرخص طريقة ممكنة.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        واش يجي الدليل بالعربية؟
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">نعم، الدليل مكتوب بالدارجة الجزائرية — تفهمه مباشرة بدون ما تترجم أي حاجة.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        كيفاش يوصلني الدليل؟
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">بعد ما تدفع نبعثلك الدليل PDF مباشرة على الواتساب أو الميسنجر خلال أقل من ساعة.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        واش فيه ضمان استرداد؟
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">نعم، ضمان 7 أيام كاملة. إذا ما عجبكش الدليل نردولك فلوسك بدون أسئلة.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        واش نقدر نشري من ولاية بعيدة؟
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">طبعاً، المنتج رقمي — يوصلك أينما كنت في الجزائر بدون توصيل ولا انتظار.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>ابدأ اليوم — ما تأخرش</h2>
+  <p>كل يوم تأخر هو يوم ضايع. الدليل متاح دلوقتي وفوراً يوصلك.</p>
+  <a href="https://wa.me/213XXXXXXXXX?text=حابب نشتري دليل كانفا" class="btn-big">تواصل معنا على الواتساب</a>
+  <p class="guarantee">🛡️ ضمان 7 أيام استرداد كامل — بدون أسئلة</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Virtual Hub</span> — جميع الحقوق محفوظة 🇩🇿</p>
+  <p style="margin-top: 6px;">صُنع بـ❤️ في الجزائر</p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
